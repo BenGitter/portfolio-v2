@@ -14,6 +14,14 @@ const imagemin = require("gulp-imagemin");
 // BrowserSync
 const browserSync = require("browser-sync").create();
 
+// GH-pages
+const ghPages = require("gulp-gh-pages");
+
+gulp.task("deploy", () => {
+  gulp.src("./dist/**/*")
+    .pipe(ghPages());
+});
+
 gulp.task("sass", () => {
   return gulp.src("./scss/*.scss")
     .pipe(sass({
