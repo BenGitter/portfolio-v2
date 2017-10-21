@@ -7,6 +7,8 @@ const minifycss = require("gulp-minify-css");
 
 // JS
 const uglify = require("gulp-uglify");
+const babel = require("gulp-babel");
+const concat = require("gulp-concat");
 
 // Images
 const imagemin = require("gulp-imagemin");
@@ -22,6 +24,18 @@ gulp.task("deploy", () => {
     .pipe(ghPages());
 });
 
+gulp.task("babel", () => {
+  gulp.src("./js/*.js")
+    .pipe(babel({
+      presets: ["env"],
+      comments: false,
+      compact: true,
+      minified: true
+    }))
+    .pipe(concat("bundle.js"))
+    .pipe(gulp.dest("dist"));
+});
+
 gulp.task("sass", () => {
   return gulp.src("./scss/*.scss")
     .pipe(sass({
@@ -33,13 +47,6 @@ gulp.task("sass", () => {
     .pipe(minifycss())
     .pipe(gulp.dest("./dist/css"))
     .pipe(browserSync.stream());
-});
-
-gulp.task("uglify", () => {
-  return gulp.src("./js/*.js")
-    .pipe(uglify())
-    .pipe(gulp.dest("./dist/js"))
-    // .pipe(browserSync.reload);
 });
 
 gulp.task("imagemin", () => {
@@ -55,7 +62,7 @@ gulp.task("index", () => {
     // .pipe(browserSync.reload);
 });
 
-gulp.task("default", ["index", "sass", "uglify", "imagemin"], () => {
+gulp.task("default", ["index", "sass", "babel", "imagemin"], () => {
 
   browserSync.init({
     server: "./dist"
@@ -65,7 +72,7 @@ gulp.task("default", ["index", "sass", "uglify", "imagemin"], () => {
 
   gulp.watch("./scss/*.scss", ["sass"]);
 
-  gulp.watch("./js/*.js", ["uglify", browserSync.reload]);
+  gulp.watch("./js/*.js", ["babel", browserSync.reload]);
 
   gulp.watch("./img/*", ["imagemin", browserSync.reload]);
 });
