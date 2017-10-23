@@ -19,13 +19,18 @@ const browserSync = require("browser-sync").create();
 // GH-pages
 const ghPages = require("gulp-gh-pages");
 
+// Plumber
+const plumber = require("gulp-plumber");
+
 gulp.task("deploy", () => {
-  gulp.src("./dist/**/*")
+  return gulp.src("./dist/**/*")
+    .pipe(plumber())
     .pipe(ghPages());
 });
 
 gulp.task("babel", () => {
-  gulp.src("./js/*.js")
+  return gulp.src("./js/*.js")
+    .pipe(plumber())
     .pipe(babel({
       presets: ["env"],
       comments: false,
@@ -38,6 +43,7 @@ gulp.task("babel", () => {
 
 gulp.task("sass", () => {
   return gulp.src("./scss/*.scss")
+    .pipe(plumber())
     .pipe(sass({
       outputStyle: "expanded"
     }))
@@ -51,6 +57,7 @@ gulp.task("sass", () => {
 
 gulp.task("imagemin", () => {
   return gulp.src("./img/*")
+    .pipe(plumber())
     // .pipe(imagemin([
     //   imagemin.gifsicle({interlaced: true}),
     //   imagemin.jpegtran({progressive: true}),
