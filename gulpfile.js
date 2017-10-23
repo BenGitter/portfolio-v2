@@ -22,6 +22,9 @@ const ghPages = require("gulp-gh-pages");
 // Plumber
 const plumber = require("gulp-plumber");
 
+// Cache
+const cache = require("gulp-cached");
+
 gulp.task("deploy", () => {
   return gulp.src("./dist/**/*")
     .pipe(plumber())
@@ -31,6 +34,7 @@ gulp.task("deploy", () => {
 gulp.task("babel", () => {
   return gulp.src("./js/*.js")
     .pipe(plumber())
+    .pipe(cache("babel"))
     .pipe(babel({
       presets: ["env"],
       comments: false,
@@ -44,6 +48,7 @@ gulp.task("babel", () => {
 gulp.task("sass", () => {
   return gulp.src("./scss/*.scss")
     .pipe(plumber())
+    .pipe(cache("sass"))
     .pipe(sass({
       outputStyle: "expanded"
     }))
@@ -58,6 +63,7 @@ gulp.task("sass", () => {
 gulp.task("imagemin", () => {
   return gulp.src("./img/*")
     .pipe(plumber())
+    .pipe(cache("img"))
     // .pipe(imagemin([
     //   imagemin.gifsicle({interlaced: true}),
     //   imagemin.jpegtran({progressive: true}),
