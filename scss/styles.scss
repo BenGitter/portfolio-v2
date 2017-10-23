@@ -6,3 +6,55 @@ body{
   font-family: sans-serif;
   background: $light-blue;
 }
+
+.nav-bar{
+  background: $dark-red;
+  color: white;
+
+  a{
+    color: darken(white, 20%);
+    text-decoration: none;
+  }
+
+  .home-link{
+    color: white;
+    padding: 15px;
+    float: left;
+    font-weight: bold;
+  }
+
+  nav{
+    float: right;
+
+    ul{
+      margin: 0;
+    }
+
+    li{
+      list-style-type: none;
+      float: right;
+      padding: 15px 0;
+
+      a{
+        padding: 15px calc(5px + 1vw);
+      }
+
+      &:hover{
+        background: $light-red;
+        color: darken(white, 10%);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px){
+  .hidden-sm-down{
+    display: none;
+  }
+}
+
+@media (min-width: 768px){
+  .hidden-md-up{
+    display: none;
+  }
+}
