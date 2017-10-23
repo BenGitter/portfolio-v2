@@ -10,6 +10,7 @@ body{
 .nav-bar{
   background: $dark-red;
   color: white;
+  margin-bottom: 30px;
 
   a{
     color: darken(white, 20%);
@@ -47,7 +48,48 @@ body{
   }
 }
 
+.about{
+  background: $mid-blue;
+
+  .intro{
+    padding-top: 30px;
+  }
+
+  .photo-horizontal{
+    padding-right: 0;
+
+    img{
+      height: 300px;
+      float: right;
+      display: block;
+    }
+  }
+  
+  .photo-vertical{
+    margin-top: 40px;
+    background: $light-blue;
+
+    img{
+      display: block;
+      margin: auto;
+      width: 100%;
+      max-width: 300px;
+      position: relative;
+      bottom: 150px;
+      border: 5px solid $mid-blue;
+      border-radius: 300px;
+    }
+  }
+}
+
+
+
+
+
 @media (max-width: 768px){
+  .intro{
+    padding-bottom: 150px;
+  }
   .hidden-sm-down{
     display: none;
   }

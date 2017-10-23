@@ -51,11 +51,11 @@ gulp.task("sass", () => {
 
 gulp.task("imagemin", () => {
   return gulp.src("./img/*")
-    .pipe(imagemin([
-      imagemin.gifsicle({interlaced: true}),
-      imagemin.jpegtran({progressive: true}),
-      imagemin.optipng({optimizationLevel: 7})
-    ]))
+    // .pipe(imagemin([
+    //   imagemin.gifsicle({interlaced: true}),
+    //   imagemin.jpegtran({progressive: true}),
+    //   imagemin.optipng({optimizationLevel: 5})
+    // ]))
     .pipe(gulp.dest("./dist/img"));
 });
 
@@ -76,5 +76,5 @@ gulp.task("default", ["index", "sass", "babel", "imagemin"], () => {
 
   gulp.watch("./js/*.js", ["babel", browserSync.reload]);
 
-  gulp.watch("./img/*.{png,gif,jpg}", ["imagemin"]);
+  // gulp.watch("./img/*.{png,gif,jpg}", ["imagemin"]);
 });
