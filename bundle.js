@@ -1,1 +1,1 @@
-"use strict";console.log("hi");
+"use strict";console.log("Script started");var navbar=document.querySelector(".nav-bar");window.addEventListener("scroll",function(e){var opac=1-e.pageY/1000;opac=opac<0.8?0.8:opac;navbar.style.opacity=opac});
