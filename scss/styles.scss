@@ -82,22 +82,26 @@ body{
   background: $mid-blue;
 
   .intro{
-    padding-top: 30px;
+    line-height: 1.4em;
+    .author{
+      text-align: right;
+    }
   }
 
   .photo-horizontal{
     padding-right: 0;
 
     img{
-      height: 300px;
+      height: 320px;
       float: right;
       display: block;
     }
   }
   
   .photo-vertical{
-    margin-top: 40px;
+    margin-top: -10px;
     background: $light-blue;
+    height: 160px;
 
     img{
       display: block;

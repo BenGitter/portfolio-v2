@@ -38,7 +38,33 @@ const Navbar = (function(){
   }
 })();
 
+const Intro = (function(){
+  const welcomeTxt = document.querySelector(".welcome");
+  const hour = new Date().getHours();
+
+  function init(){
+    setGreeting();
+  }
+
+  function setGreeting(){
+    if(hour < 6){
+      welcomeTxt.innerText = "Good night,";
+    }else if(hour < 12){
+      welcomeTxt.innerText = "Good morning,";
+    }else if(hour < 12){
+      welcomeTxt.innerText = "Good afternoon,";
+    }else{
+      welcomeTxt.innerText = "Good evening,";
+    }
+  }
+
+  return {
+    init
+  }
+})();
+
 Navbar.init();
+Intro.init();
 
 
 
