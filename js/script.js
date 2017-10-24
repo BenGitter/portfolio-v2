@@ -21,7 +21,7 @@ const Navbar = (function(){
   function toggleNav(e){
     showNav = !showNav;
     homeLink.style.display = showNav ? "none" : "inline";
-    navSmall.style.display = !showNav ? "none" : "inline";
+    navSmall.style.visibility = !showNav ? "hidden" : "visible";
     toggleBtn.classList.toggle("fa-bars");
     toggleBtn.classList.toggle("fa-angle-left");
   }

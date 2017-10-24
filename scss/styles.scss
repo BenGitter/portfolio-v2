@@ -53,13 +53,14 @@ body{
   }
 
   .nav-small{
-    display: none;
-    
+    margin-left: -50px;
+    visibility: hidden;
+
     nav{
       position: relative;
       bottom: 50px;
       float: none;
-      width: 256px;
+      width: 270px;
       margin: auto;
 
       li{
