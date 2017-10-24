@@ -80,7 +80,8 @@ gulp.task("index", () => {
 gulp.task("default", ["index", "sass", "babel", "imagemin"], () => {
 
   browserSync.init({
-    server: "./dist"
+    server: "./dist",
+    tunnel: true
   });
 
   gulp.watch("./index.html", ["index", browserSync.reload]);
