@@ -131,8 +131,12 @@ body{
 
 .portfolio-items{
   .portfolio-item{
-    height: 150px;
+    cursor: pointer;
     padding: 5px;
+
+    img{
+      width: 100%;
+    }
   }
   
   .fill-bg{
