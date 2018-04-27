@@ -63,8 +63,104 @@ const Intro = (function(){
   }
 })();
 
+const Portfolio = (function(){
+  const items = document.getElementsByClassName("portfolio-item");
+  const viewer = document.getElementsByClassName("portfolio-item-viewer")[0];
+  const viewerImg = viewer.querySelector("img");
+  const closeBtn = viewer.querySelector(".close");
+
+  const scroll = new SmoothScroll();
+
+  let hideOnScroll = false;
+
+  function init(){
+    events();
+  }
+
+  function events(){
+    for(let item of items){
+      item.addEventListener('click', handleClick);
+    }
+
+    // window.addEventListener('scroll', handleScroll);
+    closeBtn.addEventListener('click', hideViewer);
+  }
+
+  function handleScroll(e){
+    if(hideOnScroll){
+      hideViewer();
+    }
+  }
+
+  function handleClick(e){
+    // Directly redirect on mobile viewport
+    if(window.innerWidth <= 575){
+      const url = e.target.parentNode.dataset.link;
+      return url && location.assign(url);
+    }
+    
+
+    const div = e.target.parentElement;
+    const width = div.offsetWidth;
+    const height = div.offsetHeight;
+    const left = div.offsetLeft;
+    const top = div.offsetTop;
+
+    const clone = document.createElement('div');
+    clone.style.width = `${width}px`;
+    clone.style.height = `${height}px`;
+    clone.style.left = `${left}px`;
+    clone.style.top = `${top}px`;
+    clone.classList.add('expand');
+
+    viewer.style.top = `${top}px`;
+    viewerImg.src = e.target.src;
+
+    document.body.appendChild(clone);
+    scroll.animateScroll(div);
+
+    setTimeout(() => {
+      scroll.animateScroll(div);
+      viewer.classList.add('active');
+      viewer.classList.remove('fadeOut');
+    }, 1000);
+
+    setTimeout(() => {
+      if(viewer.classList.contains('active')){
+        hideOnScroll = true;
+      }
+    }, 2000);
+
+    clone.addEventListener('click', (e) => {
+      document.body.removeChild(e.target)
+    });
+
+  }
+
+  function hideViewer(){
+    const expand = document.querySelector('.expand');
+    hideOnScroll = false;
+    
+    // viewer.classList.remove('active');
+    viewer.classList.add('inactive');
+    viewer.classList.remove('active');
+    expand.classList.add('fadeOut');
+
+    // Remove expanded div
+    setTimeout(() => {
+      document.body.removeChild(expand);
+      viewer.classList.remove('inactive');
+    }, 500);
+  }
+
+  return {
+    init
+  }
+})();
+
 Navbar.init();
 Intro.init();
+Portfolio.init();
 
 
 
